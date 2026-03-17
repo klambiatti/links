@@ -61,12 +61,52 @@ body {
 }
 
 .profile__bio {
+  max-width: 32ch;
+  margin-inline: auto;
+}
+
+.profile__bio-intro {
   margin: 0;
   font-size: 0.9375rem;
   color: var(--text-muted);
   font-style: italic;
-  max-width: 32ch;
-  margin-inline: auto;
+  line-height: 1.5;
+}
+
+.profile__divider {
+  width: 2.5rem;
+  height: 1px;
+  margin: 1rem auto;
+  background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+}
+
+.profile__bio-tagline {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text);
+  font-style: normal;
+  letter-spacing: 0.02em;
+}
+
+.profile__social {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.profile__social-link {
+  color: var(--text-muted);
+  transition: color 0.2s, transform 0.15s;
+}
+
+.profile__social-link:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.profile__social-link svg {
+  display: block;
 }
 
 /* Links */
