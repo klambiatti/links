@@ -1,9 +1,27 @@
 (function () {
   var ROTATING_TEXTS = [
-    "ещё в деле",
-    "без выходных",
-    "как минимум один проект в год",
-    "маркетолог, креатор, философ"
+    "своих родных",
+    "макароны",
+    "абстрактную графику",
+    "3д-моушен",
+    "разбираться со сложным",
+    "изучать и обучать",
+    "колупаться с Houdini",
+    "геоноды в Блендере",
+    "красивые рендеры",
+    "придумывать",
+    "вайбкодить",
+    "мечтать",
+    "гулять",
+    "деньги",
+    "вкусные котлеты",
+    "выходные",
+    "солнце",
+    "во всём разбираться",
+    "строить новое",
+    "улучшать",
+    "систематизировать",
+    "строить системы"
   ];
 
   var footerRotating = document.getElementById("footer-rotating");
@@ -19,7 +37,7 @@
   }
 
   function daysSince1986() {
-    var start = new Date(1986, 0, 1);
+    var start = new Date(1986, 11, 7);
     var now = new Date();
     return Math.floor((now - start) / (24 * 60 * 60 * 1000));
   }
@@ -29,12 +47,12 @@
   }
 
   if (footerMain && footerEaster) {
-    footerMain.addEventListener("dblclick", function () {
-      footerEaster.textContent = "День № " + daysSince1986() + " с 1 января 1986";
+    footerMain.addEventListener("click", function () {
+      footerEaster.textContent = "День № " + daysSince1986() + " с 7 декабря 1986";
       footerEaster.classList.add("is-visible");
       setTimeout(function () {
         footerEaster.classList.remove("is-visible");
-      }, 4000);
+      }, 5000);
     });
   }
 })();
