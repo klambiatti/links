@@ -42,8 +42,27 @@
     return Math.floor((now - start) / (24 * 60 * 60 * 1000));
   }
 
+  var rotateInterval;
+
+  function startRotate() {
+    if (rotateInterval) return;
+    rotateInterval = setInterval(rotateFooterText, 4500);
+  }
+
+  function stopRotate() {
+    if (rotateInterval) {
+      clearInterval(rotateInterval);
+      rotateInterval = null;
+    }
+  }
+
   if (footerRotating) {
-    setInterval(rotateFooterText, 4500);
+    startRotate();
+    var footerRotatingBlock = document.querySelector(".footer__rotating");
+    if (footerRotatingBlock) {
+      footerRotatingBlock.addEventListener("mouseenter", stopRotate);
+      footerRotatingBlock.addEventListener("mouseleave", startRotate);
+    }
   }
 
   if (footerMain && footerEaster) {
