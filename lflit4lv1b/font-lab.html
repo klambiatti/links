@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Font lab — подбор пары</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400;1,7..72,500&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@400;500;700;800&family=Montserrat:wght@400;500;800;900&family=Onest:wght@400;500&family=Russo+One&family=Unbounded:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0d0d0d;
+        --muted: #5c5c5c;
+        --surface: #fff;
+        --soft: #f4f4f0;
+        --accent: #e6ff2b;
+        --hairline: rgb(13 13 13 / 0.12);
+        --pad: clamp(1rem, 4vw, 2rem);
+        --mono: "IBM Plex Mono", ui-monospace, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--soft);
+        font-family: system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        padding: 1rem var(--pad);
+        background: rgb(255 255 255 / 0.92);
+        border-bottom: 1px solid var(--hairline);
+        backdrop-filter: blur(10px);
+      }
+
+      header h1 {
+        margin: 0 0 0.35rem;
+        font-size: 1rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-family: var(--mono);
+      }
+
+      header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.4;
+        max-width: 52rem;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1rem;
+        padding: 1rem var(--pad) 3rem;
+      }
+
+      @media (min-width: 960px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--hairline);
+        padding: 1.25rem 1.25rem 1.5rem;
+      }
+
+      .card.pick {
+        outline: 2px solid var(--ink);
+        outline-offset: 2px;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 0.75rem;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .name {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .stack {
+        color: var(--muted);
+        font-size: 0.78rem;
+        line-height: 1.35;
+      }
+
+      .pick-btn {
+        appearance: none;
+        border: 1px solid var(--ink);
+        background: var(--accent);
+        color: var(--ink);
+        min-height: 40px;
+        padding: 0.45rem 0.75rem;
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .sample {
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .eyebrow {
+        margin: 0;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .headline {
+        margin: 0;
+        font-size: clamp(1.8rem, 5vw, 2.6rem);
+        line-height: 0.92;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .accent {
+        display: inline;
+        background: var(--accent);
+        padding: 0.02em 0.1em;
+      }
+
+      .quote {
+        margin: 0;
+        font-size: 1.05rem;
+        font-style: italic;
+        line-height: 1.4;
+        max-width: 34rem;
+      }
+
+      .title {
+        margin: 0;
+        font-size: clamp(1.35rem, 3.4vw, 1.75rem);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .body {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+
+      .label {
+        margin: 0;
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      footer {
+        position: sticky;
+        bottom: 0;
+        padding: 0.85rem var(--pad);
+        background: var(--ink);
+        color: #fff;
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      footer strong {
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      /* Pairings */
+      .p1 {
+        --brutal: "Russo One", "Arial Black", system-ui, sans-serif;
+        --display: Lora, Georgia, serif;
+        --body: Onest, system-ui, sans-serif;
+      }
+      .p2 {
+        --brutal: "Arial Black", "Helvetica Neue", system-ui, sans-serif;
+        --display: Georgia, "Times New Roman", serif;
+        --body: "Helvetica Neue", system-ui, sans-serif;
+      }
+      .p3 {
+        --brutal: Unbounded, "Arial Black", system-ui, sans-serif;
+        --display: Literata, Georgia, serif;
+        --body: Onest, system-ui, sans-serif;
+      }
+      .p4 {
+        --brutal: Montserrat, "Arial Black", system-ui, sans-serif;
+        --display: Lora, Georgia, serif;
+        --body: Manrope, system-ui, sans-serif;
+      }
+      .p5 {
+        --brutal: "Golos Text", "Arial Black", system-ui, sans-serif;
+        --display: Literata, Georgia, serif;
+        --body: "Golos Text", system-ui, sans-serif;
+      }
+      .p6 {
+        --brutal: Unbounded, "Arial Black", system-ui, sans-serif;
+        --display: Lora, Georgia, serif;
+        --body: Manrope, system-ui, sans-serif;
+      }
+
+      .p1 .headline,
+      .p1 .title,
+      .p2 .headline,
+      .p2 .title,
+      .p3 .headline,
+      .p3 .title,
+      .p4 .headline,
+      .p4 .title,
+      .p5 .headline,
+      .p5 .title,
+      .p6 .headline,
+      .p6 .title {
+        font-family: var(--brutal);
+      }
+
+      .p4 .headline,
+      .p4 .title {
+        font-weight: 900;
+      }
+
+      .p5 .headline,
+      .p5 .title {
+        font-weight: 900;
+      }
+
+      .p3 .headline,
+      .p3 .title,
+      .p6 .headline,
+      .p6 .title {
+        font-weight: 900;
+      }
+
+      .p1 .quote,
+      .p2 .quote,
+      .p3 .quote,
+      .p4 .quote,
+      .p5 .quote,
+      .p6 .quote {
+        font-family: var(--display);
+      }
+
+      .p1 .body,
+      .p1 .eyebrow,
+      .p2 .body,
+      .p2 .eyebrow,
+      .p3 .body,
+      .p3 .eyebrow,
+      .p4 .body,
+      .p4 .eyebrow,
+      .p5 .body,
+      .p5 .eyebrow,
+      .p6 .body,
+      .p6 .eyebrow {
+        font-family: var(--body);
+      }
+
+      .p1 .eyebrow,
+      .p2 .eyebrow,
+      .p3 .eyebrow,
+      .p4 .eyebrow,
+      .p5 .eyebrow,
+      .p6 .eyebrow {
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Font lab</h1>
+      <p>
+        Сравни пары на реальных текстах сайта. Arial Black — только system
+        (как на старом Mac desktop). Остальные — с кириллицей и пригодны для
+        веба. Нажми «Выбрать» и скажи номер в чате.
+      </p>
+    </header>
+
+    <div class="grid" id="grid"></div>
+    <footer>
+      Выбрано: <strong id="choice">ничего</strong>
+    </footer>
+
+    <script>
+      const pairs = [
+        {
+          id: "p1",
+          name: "1 · Сейчас на проде",
+          stack: "Russo One / Lora / Onest",
+          note: "Текущий live",
+        },
+        {
+          id: "p2",
+          name: "2 · Desktop-illusion",
+          stack: "Arial Black / Georgia / Helvetica Neue",
+          note: "То, что часто видел на Mac без Archivo Cyrillic",
+        },
+        {
+          id: "p3",
+          name: "3 · Brutal modern",
+          stack: "Unbounded / Literata / Onest",
+          note: "Ближе к Archivo-характеру, есть кириллица",
+        },
+        {
+          id: "p4",
+          name: "4 · Geometric black",
+          stack: "Montserrat Black / Lora / Manrope",
+          note: "Плотный геометрический black",
+        },
+        {
+          id: "p5",
+          name: "5 · Cyrillic-first",
+          stack: "Golos Text / Literata / Golos Text",
+          note: "Заточен под русский, спокойнее",
+        },
+        {
+          id: "p6",
+          name: "6 · Sharp editorial",
+          stack: "Unbounded / Lora / Manrope",
+          note: "Жёсткий display + мягкий editorial",
+        },
+      ];
+
+      const grid = document.getElementById("grid");
+      const choice = document.getElementById("choice");
+
+      for (const pair of pairs) {
+        const card = document.createElement("article");
+        card.className = `card ${pair.id}`;
+        card.dataset.id = pair.id;
+        card.innerHTML = `
+          <div class="meta">
+            <div>
+              <div class="name">${pair.name}</div>
+              <div class="stack">${pair.stack}<br />${pair.note}</div>
+            </div>
+            <button class="pick-btn" type="button">Выбрать</button>
+          </div>
+          <div class="sample">
+            <p class="eyebrow">Исследую мир через технологии, творчество, креатив, динамику и рефлексию.</p>
+            <h2 class="headline">
+              Креатор,<br />маркетолог,<br /><span class="accent">AI-интегратор</span>
+            </h2>
+            <p class="quote">Помогаю брендам и людям систематизировать идеи и смыслы — и превращать их в язык, форму, коммуникацию и продукты.</p>
+            <p class="label">Проект</p>
+            <p class="title">«Тухло ли в офисе?»</p>
+            <p class="body">Генерация → отбор → продакшн: изображения, видео, вариации</p>
+          </div>
+        `;
+        card.querySelector(".pick-btn").addEventListener("click", () => {
+          document
+            .querySelectorAll(".card")
+            .forEach((node) => node.classList.remove("pick"));
+          card.classList.add("pick");
+          choice.textContent = pair.name;
+        });
+        grid.appendChild(card);
+      }
+    </script>
+  </body>
+</html>
